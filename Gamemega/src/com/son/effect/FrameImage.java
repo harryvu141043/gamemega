@@ -43,4 +43,8 @@ public class FrameImage {
         Graphics g=image.getGraphics ();
         g.drawImage ( frameImage.getImage (),0,0,null );
     }
+    FrameImage(){
+        image=null;
+        name=null;
+    }
 }

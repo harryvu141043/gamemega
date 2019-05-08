@@ -1,5 +1,7 @@
 package com.son.userinterface;
 
+import com.son.effect.CacheDataloader;
+
 import javax.imageio.IIOException;
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +19,11 @@ public class GameFrame extends JFrame {
         GamePanel=new GamePanel();
         this.add(GamePanel);
         this.addKeyListener(GamePanel);
+        try {
+            CacheDataloader.getInstance ().LoadData ();
+        }catch (IOException ex){
+            ex.printStackTrace ();
+        }
     }
     public void  Startgame(){
         GamePanel.Startgame();

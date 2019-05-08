@@ -1,6 +1,7 @@
 package com.son.userinterface;
 
 import com.son.effect.Animation;
+import com.son.effect.CacheDataloader;
 import com.son.effect.FrameImage;
 
 import javax.imageio.IIOException;
@@ -19,46 +20,21 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     private Thread thread;
     private boolean isRunning;
     private InputManager InputManager;
-    BufferedImage Image;
-    BufferedImage SubImage;
     FrameImage frame1;
-    FrameImage frame2;
-    FrameImage frame3;
-    Animation anim;
+
 
 
     public GamePanel() {
         InputManager = new InputManager ();
-        try {
-            BufferedImage image = ImageIO.read ( new File ( "data/megasprite.png" ) );
-            BufferedImage image1=image.getSubimage(529,38,90,100);
-            frame1=new FrameImage("frame1",image1);
-            BufferedImage image2=image.getSubimage(616,38,80,100);
-            frame2=new FrameImage("frame2",image2);
-            BufferedImage image3=image.getSubimage(704,38,80,100);
-            frame3=new FrameImage("frame3",image3);
-
-            anim=new Animation();
-            anim.add(frame1,500*1000000);
-            anim.add(frame2,500*1000000);
-            anim.add(frame3,500*1000000);
-        } catch (IOException ex) {
-            ex.printStackTrace ();
-        }
-
-
-
-
-
+        frame1= CacheDataloader.getInstance ().getFrameImage ( "idle2" );
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint ( g );
         Graphics2D g2=(Graphics2D) g;
+        frame1.draw (g2,30,30  );
 
-        anim.Update ( System.nanoTime());
-        anim.draw (100,130,g2);
 
     }
     public void Startgame() {
@@ -79,7 +55,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         int a = 1;
 
         while (isRunning) {
-            repaint ();
+
             long deltatime = System.nanoTime () - begintime;
             sleeptime = period - deltatime;
             try {

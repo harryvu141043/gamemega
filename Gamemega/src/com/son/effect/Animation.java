@@ -23,6 +23,7 @@ public class Animation {
         ignoreFrames = new ArrayList<Boolean> ();
         drawRectFrame = false;
         isRepeated = true;
+        frameImages=new ArrayList<FrameImage> ();
     }
 
     public Animation(Animation animation) {
